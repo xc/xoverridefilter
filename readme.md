@@ -18,7 +18,7 @@ Definition in override.ini
 
 Implementation in class myFormView
 
-    class myFormView
+    class myFormView implements xNodeviewRender
     {
       function myFormView( $node, $tpl, $viewMode, $http )
       {
@@ -54,6 +54,8 @@ How to use it
 Example
 -------
 
+(Please see doc/example for code)
+
 1. Configure condition and class under myextension
 
    **Scenario 1 - Custom view logic** 
@@ -84,7 +86,7 @@ Example
     extension/myextension/classes/myformview.php
 
         <?php
-        class myFormView
+        class myFormView implements xNodeviewRender
         {
          /**
           * This method is invoked before template is fetched.
@@ -96,8 +98,8 @@ Example
           */
           public function initNodeview( $node, $tpl, $viewMode, $http )
           {
-           // Actual logic is implemented here
-          
+            // Actual logic is implemented here
+
           }
         }
         ?>
