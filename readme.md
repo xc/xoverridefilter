@@ -60,9 +60,9 @@ Example
   
    extension/myextension/settings/override.ini.append.php.
 
-       [myform_view]
-       Match[class_identifier]=myform
-       Class=myFormView
+        [myform_view]
+        Match[class_identifier]=myform
+        Class=myFormView
      
    The configuration above means that ‘myform’ objects will use myFormView for view logic. Form templates can be defined in additional template override rules.
 
