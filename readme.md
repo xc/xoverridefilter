@@ -20,7 +20,7 @@ Implementation in class myFormView
 
     class myFormView
     {
-      function myFormView( $node, $tpl, $viewMode, $http )
+      function initNodeview( $node, $tpl, $viewMode, $http )
       {
         //implement business logic, set template variable
       }
