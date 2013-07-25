@@ -18,13 +18,13 @@ Definition in override.ini
 
 Implementation in class myFormView
 
-  class myFormView
-  {
+    class myFormView
+    {
       function myFormView( $node, $tpl, $viewMode, $http )
       {
         //implement business logic, set template variable
       }
-  }
+    }
 
 Enhanced override.ini
 ---------------------
