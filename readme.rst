@@ -1,10 +1,13 @@
 xOverrideFilter
 =================
 
-Intro
------
-With this extension, you can define your business logic(a php class) together with template override in override.ini, so business logic in php instead of custom operator, complicated templating, or datatype.
-override.ini:
+Introduction
+-----------
+With this extension, you can define your business logic(a php class) with template override in override.ini, so business logic can **easily and clearly** be done in php instead of custom operator, complicated templating, or datatype.
+
+Small example:
+
+Definition in override.ini
 
        [myform_view]
        Source=node/view/full.tpl
@@ -13,7 +16,8 @@ override.ini:
        Match[class_identifier]=myform
        Class=myFormView
 
-Implementation logic
+Implementation in class myFormView
+
   class myFormView
   {
       function myFormView( $node, $tpl, $viewMode, $http )
@@ -21,7 +25,6 @@ Implementation logic
         //implement business logic, set template variable
       }
   }
-
 
 Enhanced override.ini
 ---------------------
@@ -38,7 +41,7 @@ Install
 1. Copy this extension under <ezp_root>/extension
 2. Activate this extension
 3. Clear ini cache
-3. Regenerate autoload array
+4. Regenerate autoload array
 
 How to use it
 -------------
