@@ -77,10 +77,11 @@ Example
         Match[section_identifier]=standard
         Class=myFormView
 
-The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
+   The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
 
-2. Implement class myFormView.
-extension/myextension/classes/myformview.php
+2. Implement class myFormView
+
+    extension/myextension/classes/myformview.php
 
         <?php
         class myFormView
