@@ -107,7 +107,7 @@ class xOverrideConditionFilter
             $overrideView = new $overrideClass();
             $http = eZHTTPTool::instance();
             eZDebug::writeNotice( "Loading view logic $overrideClass", __METHOD__ );
-            $overrideView->loadView( $http, $node, $object, $tpl, $viewMode );
+            $overrideView->initNodeview( $node, $tpl, $viewMode, $http );
         }
     }
 }
