@@ -1,26 +1,26 @@
-X Override Filter
+xOverrideFilter
 =================
 
 Introduction
 -----------
-With this simple eZ Publish extension, you can define your business logic(a php class) with template override in override.ini, so business logic can **easily and clearly** be done in php instead of custom operator, complicated templating, or datatype.
+With this extension, you can define your business logic(a php class) with template override in override.ini, so business logic can **easily and clearly** be done in php instead of custom operator, complicated templating, or datatype.
 
 Small example:
 
 Definition in override.ini
 
-       [myform_view]
-       Source=node/view/full.tpl
-       MatchFile=form.tpl
-       Subdir=templates
-       Match[class_identifier]=myform
-       Class=myFormView
+    [myform_view]
+    Source=node/view/full.tpl
+    MatchFile=form.tpl
+    Subdir=templates
+    Match[class_identifier]=myform
+    Class=myFormView
 
 Implementation in class myFormView
 
     class myFormView
     {
-      function initNodeview( $node, $tpl, $viewMode, $http )
+      function myFormView( $node, $tpl, $viewMode, $http )
       {
         //implement business logic, set template variable
       }
@@ -56,34 +56,34 @@ Example
 
 1. Configure condition and class under myextension
 
-   **Scenario 1 - Custom view logic** You can define view logic as a separate override rule.
+   **Scenario 1 - Custom view logic** 
+  
    extension/myextension/settings/override.ini.append.php.
 
-        [myform_view]
-        Match[class_identifier]=myform
-        Class=myFormView
+       [myform_view]
+       Match[class_identifier]=myform
+       Class=myFormView
      
    The configuration above means that ‘myform’ objects will use myFormView for view logic. Form templates can be defined in additional template override rules.
 
    **Scenario 2 - Custom view logic with custom template**. You can also combine view logic with template override in one override rule. 
 
-        [myform_view_2]
-        Source=node/view/full.tpl
-        MatchFile=form.tpl
-        Subdir=templates
-        Match[class_identifier]=myform
-        #Condition section_identifier will be ignored by custom view logic.
-        Match[section_identifier]=standard
-        Class=myFormView
+       [myform_view_2]
+       Source=node/view/full.tpl
+       MatchFile=form.tpl
+       Subdir=templates
+       Match[class_identifier]=myform
+       #Condition section_identifier will be ignored by custom view logic.
+       Match[section_identifier]=standard
+       Class=myFormView
 The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
 
 2. Implement class myFormView.
 extension/myextension/classes/myformview.php
 
-        <?php
-        class myFormView
-        {
-
+      <?php
+      class myFormView
+      {
          /**
           * This method is invoked before template is fetched.
           *
@@ -97,8 +97,7 @@ extension/myextension/classes/myformview.php
            // Actual logic is implemented here
           
           }
-
-        }
+       }
       ?>
 
 3. Regenerated autoload array for extension
