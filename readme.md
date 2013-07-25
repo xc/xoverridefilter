@@ -103,7 +103,7 @@ Example(See doc/example for code)
 
 FAQ
 ---------
-1. Is the business logic inside view cahce system?
+1. Is the business logic inside view cache?
 
    Yes, by default view cache is generated after first run.
 
