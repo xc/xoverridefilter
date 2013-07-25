@@ -100,7 +100,7 @@ Example
           
           }
         }
-       ?>
+        ?>
 
 3. Regenerated autoload array for extension
 <php path> bin/php/ezpgenerateautoloads.php -e
