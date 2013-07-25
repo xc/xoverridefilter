@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<software>
+    <metadata>
+        <name>X Override Filter</name>
+        <version>1.0.0-beta</version>
+        <copyright>Copyright (C) 2013 Chen Xiongjie</copyright>
+        <license>GPL v2.0</license>
+        <info_url>https://github.com/xc/xoverridefilter</info_url>
+    </metadata>
+</software>
