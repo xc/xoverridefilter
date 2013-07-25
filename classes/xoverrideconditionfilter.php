@@ -4,7 +4,7 @@
 //
 // Created on: <25-07-2013 12:05:00 xc>
 //
-// Copyright (C) 2012 Grenland Web AS. All rights reserved.
+// Copyright (C) Chen Xiongjie. All rights reserved.
 //
 // This file may be distributed and/or modified under the terms of the
 // "GNU General Public License" version 2 as published by the Free
