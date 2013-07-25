@@ -1,4 +1,4 @@
-xOverrideFilter
+X Override Filter
 =================
 
 Introduction
@@ -60,30 +60,32 @@ Example
   
    extension/myextension/settings/override.ini.append.php.
 
-       [myform_view]
-       Match[class_identifier]=myform
-       Class=myFormView
+        [myform_view]
+        Match[class_identifier]=myform
+        Class=myFormView
      
    The configuration above means that ‘myform’ objects will use myFormView for view logic. Form templates can be defined in additional template override rules.
 
    **Scenario 2 - Custom view logic with custom template**. You can also combine view logic with template override in one override rule. 
 
-       [myform_view_2]
-       Source=node/view/full.tpl
-       MatchFile=form.tpl
-       Subdir=templates
-       Match[class_identifier]=myform
-       #Condition section_identifier will be ignored by custom view logic.
-       Match[section_identifier]=standard
-       Class=myFormView
-The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
+        [myform_view_2]
+        Source=node/view/full.tpl
+        MatchFile=form.tpl
+        Subdir=templates
+        Match[class_identifier]=myform
+        #Condition section_identifier will be ignored by custom view logic.
+        Match[section_identifier]=standard
+        Class=myFormView
 
-2. Implement class myFormView.
-extension/myextension/classes/myformview.php
+   The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
 
-       <?php
-       class myFormView
-       {
+2. Implement class myFormView
+
+    extension/myextension/classes/myformview.php
+
+        <?php
+        class myFormView
+        {
          /**
           * This method is invoked before template is fetched.
           *
@@ -98,7 +100,7 @@ extension/myextension/classes/myformview.php
           
           }
         }
-       ?>
+        ?>
 
 3. Regenerated autoload array for extension
 <php path> bin/php/ezpgenerateautoloads.php -e
