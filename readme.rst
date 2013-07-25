@@ -3,7 +3,25 @@ xOverrideFilter
 
 Intro
 -----
-This extension supoprt view logic condition in override.ini
+With this extension, you can define your business logic(a php class) together with template override in override.ini, so business logic in php instead of custom operator, complicated templating, or datatype.
+override.ini:
+
+       [myform_view]
+       Source=node/view/full.tpl
+       MatchFile=form.tpl
+       Subdir=templates
+       Match[class_identifier]=myform
+       Class=myFormView
+
+Implementation logic
+  class myFormView
+  {
+      function myFormView( $node, $tpl, $viewMode, $http )
+      {
+        //implement business logic, set template variable
+      }
+  }
+
 
 Enhanced override.ini
 ---------------------
@@ -72,7 +90,7 @@ extension/myextension/classes/myformview.php
           * 2. Customize http form action
           *
           */
-          public function initNodeview( $http, $node, $object, $tpl, $viewMode )
+          public function initNodeview( $node, $tpl, $viewMode, $http )
           {
            // Actual logic is implemented here
           
