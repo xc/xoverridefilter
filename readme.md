@@ -81,9 +81,9 @@ The configuration above means that, 'myform' objects under Standard section will
 2. Implement class myFormView.
 extension/myextension/classes/myformview.php
 
-      <?php
-      class myFormView
-      {
+       <?php
+       class myFormView
+       {
          /**
           * This method is invoked before template is fetched.
           *
@@ -97,8 +97,8 @@ extension/myextension/classes/myformview.php
            // Actual logic is implemented here
           
           }
-       }
-      ?>
+        }
+       ?>
 
 3. Regenerated autoload array for extension
 <php path> bin/php/ezpgenerateautoloads.php -e
