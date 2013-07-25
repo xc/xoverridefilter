@@ -20,7 +20,7 @@ Implementation in class myFormView
 
     class myFormView implements xNodeviewRender
     {
-      function myFormView( $node, $tpl, $viewMode, $http )
+      function myFormView( $module, $node, $tpl, $viewMode )
       {
         //implement business logic, set template variable
       }
@@ -43,18 +43,10 @@ Install
 3. Clear ini cache
 4. Regenerate autoload array
 
-How to use it
--------------
-1. Configure override rule for view logic in override.ini
-2. Implement the logic class under that extension
-3. Regenerate autoload array for extension
-4. [optional] Clear view cache
 
+Example(See doc/example folder for example code)
+---------
 
-Example
--------
-
-(Please see doc/example for code)
 
 1. Configure condition and class under myextension
 
@@ -96,7 +88,7 @@ Example
           * 2. Customize http form action
           *
           */
-          public function initNodeview( $node, $tpl, $viewMode, $http )
+          public function initNodeview( $module, $node, $tpl, $viewMode, $http )
           {
             // Actual logic is implemented here
 
