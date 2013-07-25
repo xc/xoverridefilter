@@ -1,12 +1,15 @@
 {
     "name": "xc/xoverridefilter",
-    "description": "X Override Filter is a simple but useful extension for eZ Publish legacy, allowing configuring business logic together with template in override.ini",
+    "description": "X Override Filter is a simple but useful extension for eZ Publish legacy, allowing configuring eZ Publish business logic together with template in override.ini",
     "type": "ezpublish-legacy-extension",
+    "version": "1.0.0-beta1",
+    "homepage": "https://github.com/xc/xoverridefilter",
     "license": "GPL-2.0",
     "authors": [
         {
             "name": "Chen Xiongjie",
-            "homepage": "https://github.com/xc/xoverridefilter"
+            "email": "chen.xcmail@gmail.com",
+            "homepage": "http://dubi.cc"
         }
     ],
     "minimum-stability": "dev",
