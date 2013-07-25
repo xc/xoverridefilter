@@ -44,7 +44,7 @@ Install
 4. Regenerate autoload array
 
 
-Example(See doc/example folder for code)
+Example(See doc/example for code)
 ---------
 
 
@@ -100,3 +100,18 @@ Example(See doc/example folder for code)
 <php path> bin/php/ezpgenerateautoloads.php -e
 
 4. Clear cache before viewing the page(content/view/full/50).
+
+FAQ
+---------
+1. Is the business logic inside view cahce system?
+
+   Yes, by default view cache is generated after first run.
+
+   For complicated actions(like form), it's recommanded to disable view cache from php: 
+
+         $tpl->setVariable( 'cache_ttl', 0 );
+
+
+2. Is it possible to customize your view cache?
+It's possible. (Example to be added).
+
