@@ -1,6 +1,6 @@
 <?php
 //
-// Definition of overrideCondition class
+// Definition of xOverrideConditionFilter class
 //
 // Created on: <25-07-2013 12:05:00 xc>
 //
