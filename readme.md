@@ -56,8 +56,7 @@ Example
 
 1. Configure condition and class under myextension
 
-   **Scenario 1 - Custom view logic** 
-  
+   **Scenario 1 - Custom view logic** You can define view logic as a separate override rule.
    extension/myextension/settings/override.ini.append.php.
 
         [myform_view]
