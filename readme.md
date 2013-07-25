@@ -108,7 +108,8 @@ FAQ
    Yes, by default view cache is generated after first run.
 
    For complicated actions(like form), it's recommanded to disable view cache from php: 
-
-         $tpl->setVariable( 'cache_ttl', 0 );
+         public function initNodeview( $module, $node, $tpl, $viewMode )
+         {
+             $tpl->setVariable( 'cache_ttl', 0 );
 
 
