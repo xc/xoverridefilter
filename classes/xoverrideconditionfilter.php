@@ -23,14 +23,16 @@
  
 class xOverrideConditionFilter
 {
-    public static function filter( $node, $tpl, $viewMode, $http )
+    public static function filter( $module, $node, $tpl, $viewMode )
     {
         $ini = eZINI::instance( 'override.ini' );
         $conditions = $ini->groups();
 
         $nodeID = $node->attribute( 'node_id' );
         $object = $node->attribute( 'object' );
-        $classIdentifier = $object->attribute( 'class_identfier' );
+
+        $classIdentifier = $object->attribute( 'class_identifier' );
+        $overrideClass = null;
 
         foreach( $conditions as $condition )
         {
@@ -107,7 +109,7 @@ class xOverrideConditionFilter
             $overrideView = new $overrideClass();
             $http = eZHTTPTool::instance();
             eZDebug::writeNotice( "Loading view logic $overrideClass", __METHOD__ );
-            $overrideView->initNodeview( $node, $tpl, $viewMode, $http );
+            $overrideView->initNodeview( $module, $node, $tpl, $viewMode );
         }
     }
 }
