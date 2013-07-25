@@ -44,7 +44,7 @@ Install
 4. Regenerate autoload array
 
 
-Example(See doc/example folder for example code)
+Example(See doc/example folder for code)
 ---------
 
 
