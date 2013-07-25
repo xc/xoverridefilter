@@ -112,6 +112,3 @@ FAQ
          $tpl->setVariable( 'cache_ttl', 0 );
 
 
-2. Is it possible to customize your view cache?
-It's possible. (Example to be added).
-
