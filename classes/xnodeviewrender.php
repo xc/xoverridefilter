@@ -25,3 +25,5 @@ interface xNodeviewRender
 {
     public function initNodeview( $module, $node, $tpl, $viewMode );
 }
+
+?>
