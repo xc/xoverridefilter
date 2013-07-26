@@ -52,7 +52,7 @@ Install
          patch -p0 < event-pre_rending-4.5-4.7.diff --dry-run
          patch -p0 < event-pre_rending-4.5-4.7.diff
        
-    P.S. For community versioning, 4.5-4.7 = 2011.5-2012.5 
+    P.S. For community versioning, 4.5-4.7 = community 2011.5-2012.5 
 2. Activate extension xoverridefilter
 3. Clear ini cache
 4. Regenerate autoload array
