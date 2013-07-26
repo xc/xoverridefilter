@@ -74,7 +74,9 @@ Example(See doc/example for code)
    The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
 
 
-2. Implement template
+2. Implement template form.tpl
+
+    design/standard/override/templates/form.tpl
 
         {if is_set( $result )}
         <div>{$result}</div>
