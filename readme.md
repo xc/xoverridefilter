@@ -14,13 +14,14 @@ Definition in override.ini
     MatchFile=form.tpl
     Subdir=templates
     Match[class_identifier]=myform
+    #this is new :)
     Class=myFormView
 
 Implementation in class myFormView
 
     class myFormView implements xNodeviewRender
     {
-      function myFormView( $module, $node, $tpl, $viewMode )
+      function initNodeview( $module, $node, $tpl, $viewMode )
       {
         //implement business logic, set template variable
       }
