@@ -76,7 +76,7 @@ Example(See doc/example for code)
 
 2. Implement template form.tpl
 
-    design/standard/override/templates/form.tpl
+    extension/myextension/design/standard/override/templates/form.tpl
 
         {if is_set( $result )}
         <div>{$result}</div>
