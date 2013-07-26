@@ -155,9 +155,9 @@ FAQ
 ---------
 1. Is the business logic inside view cache?
 
-   Yes, by default view cache is generated after first run.
+   Yes, for first view eZ will invoke the business logic and generate view cache, for second view it may load view cache if the view cache keys are not changed.
 
-   For complicated actions(like form), it's recommanded to disable view cache from php: 
+   Because of that, for high dynamic page(like form), it's recommanded to disable view cache from php: 
    
          public function initNodeview( $module, $node, $tpl, $viewMode )
          {
