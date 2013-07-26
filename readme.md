@@ -3,7 +3,7 @@ X Override Filter
 
 Introduction
 -----------
-With this simple extension, you can define your business logic(a php class) with template override in override.ini, so business logic can **easily and clearly** be done in php instead of custom operator, complicated templating, or datatype.
+With this simple extension, you can define your business logic(a php class) with template override in override.ini, so business logic can be **easily and clearly** done in a pure php class instead of custom operator, complicated templating, or datatype.
 
 Small example:
 
