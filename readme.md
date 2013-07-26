@@ -37,9 +37,10 @@ The 2 above can be combined with existing template override.
 
 Requirements
 ---------
-- eZ Publish 5.2: it will work well
 
-- eZ Publish 4.2 - 5.1: it needs kernel patch(not a hack, but a commit backporting). see doc/patches/event-pre_rending-*.diff
+- For eZ Publish 5.2: it works well
+
+- For eZ Publish 4.2 - 5.1: it needs a kernel patch(not an unauthorized hack, but a backport). see doc/patches/event-pre_rending-*.diff
 
 
 Install
