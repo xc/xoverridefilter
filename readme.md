@@ -123,7 +123,7 @@ Example(See doc/example for code)
           * 2. Customize http form action
           *
           */
-          public function initNodeview( $module, $node, $tpl, $viewMode, $http )
+          public function initNodeview( $module, $node, $tpl, $viewMode )
           {
                // Disable view cache for this page, since the form will be dynamic
                $tpl->setVariable( 'cache_ttl', 0 );
