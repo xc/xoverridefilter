@@ -18,8 +18,6 @@
 // The "GNU General Public License" (GPL) is available at
 // http://www.gnu.org/copyleft/gpl.html.
 //
-// Contact licence@grenlandweb.no if any conditions of this licencing isn't clear to
-// you.
 //
 
  
