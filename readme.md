@@ -174,3 +174,16 @@ Should
 Could
 
 - Control cache via persistant variable/cache block keys
+
+
+Feedback?
+----------
+Welcome to give any comments/suggestions. 
+
+Review it on projects.ez.no: http://projects.ez.no/xoverridefilter/reviews .
+
+Contact me? You can reach me by share.ez.no: http://share.ez.no/community/profile/86893
+
+Issue tracker: https://github.com/xc/xoverridefilter/issues
+
+
