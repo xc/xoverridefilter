@@ -148,3 +148,13 @@ FAQ
              $tpl->setVariable( 'cache_ttl', 0 );
 
 
+Roadmap
+--------
+Should
+
+- Support multi Class[] instead of Class
+
+Could
+
+- Support override rules hierarchy
+- Control cache via persistant variable/cache block keys
