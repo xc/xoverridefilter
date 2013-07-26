@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Xoverridefilter by xc</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Xoverridefilter</h1>
+          <h2>Implement your eZ Publish business logic in php class.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/xc/xoverridefilter/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/xc/xoverridefilter/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/xc/xoverridefilter" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="x-override-filter" class="anchor" href="#x-override-filter"><span class="octicon octicon-link"></span></a>X Override Filter</h1>
+
+<h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>With this simple extension, you can define your business logic(a php class) with template override in override.ini, so business logic can be <strong>easily and clearly</strong> done in a pure php class instead of custom operator, complicated templating, or datatype.</p>
+
+<p>Small example:</p>
+
+<p>Definition in override.ini</p>
+
+<pre><code>[myform_view]
+Source=node/view/full.tpl
+MatchFile=form.tpl
+Subdir=templates
+Match[class_identifier]=myform
+#Class is new :)
+Class=myFormView
+</code></pre>
+
+<p>Implementation in class myFormView</p>
+
+<pre><code>class myFormView implements xNodeviewRender
+{
+  function initNodeview( $module, $node, $tpl, $viewMode )
+  {
+    //implement business logic, set template variable
+  }
+}
+</code></pre>
+
+<h2>
+<a name="enhanced-overrideini" class="anchor" href="#enhanced-overrideini"><span class="octicon octicon-link"></span></a>Enhanced override.ini</h2>
+
+<p>Enhanced override.ini supports</p>
+
+<ol>
+<li>Class tag to identify a php class implenetation of the logic.</li>
+<li>Match[node], Match[class_identifer], Match[viewmode] for view logic conditions</li>
+</ol><p>The 2 above can be combined with existing template override.</p>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li><p>For eZ Publish 5.2: it works well</p></li>
+<li><p>For eZ Publish 4.2 - 5.1: it needs a kernel patch(not an unauthorized hack, but a feature backport). see doc/patches/event-pre_rending-*.diff</p></li>
+</ul><h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<ol>
+<li>Copy this extension under &lt;ezp_root&gt;/extension</li>
+<li>
+<p>If your eZ Publish is &lt;5.2 (e.g. 4.7), run these commands under &lt;ezp_root&gt;</p>
+
+<pre><code> cp extension/xoverridefilter/doc/patches/event-pre_rending-4.5-4.7.diff ./
+ patch -p0 &lt; event-pre_rending-4.5-4.7.diff --dry-run
+ patch -p0 &lt; event-pre_rending-4.5-4.7.diff
+</code></pre>
+
+<p>P.S. For community versioning, 4.5-4.7 = community 2011.5-2012.5 </p>
+</li>
+<li><p>Activate extension xoverridefilter</p></li>
+<li><p>Clear ini cache</p></li>
+<li><p>Regenerate autoload array</p></li>
+</ol><h2>
+<a name="examplesee-docexample-for-code" class="anchor" href="#examplesee-docexample-for-code"><span class="octicon octicon-link"></span></a>Example(See doc/example for code)</h2>
+
+<ol>
+<li>
+<p>Configure condition and class under myextension</p>
+
+<p><strong>Scenario 1 - Custom view logic</strong> </p>
+
+<p>extension/myextension/settings/override.ini.append.php.</p>
+
+<pre><code>[myform_view]
+Match[class_identifier]=myform
+Class=myFormView
+</code></pre>
+
+<p>The configuration above means that ‘myform’ objects will use myFormView for view logic. Form templates can be defined in additional template override rules.</p>
+
+<p><strong>Scenario 2 - Custom view logic with custom template</strong>. You can also combine view logic with template override in one override rule. </p>
+
+<pre><code>[myform_view_2]
+Source=node/view/full.tpl
+MatchFile=form.tpl
+Subdir=templates
+Match[class_identifier]=myform
+#Condition section_identifier will be ignored by custom view logic.
+Match[section_identifier]=standard
+Class=myFormView
+</code></pre>
+
+<p>The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.</p>
+</li>
+<li>
+<p>Implement template form.tpl</p>
+
+<p>extension/myextension/design/standard/override/templates/form.tpl</p>
+
+<pre><code>{if is_set( $result )}
+&lt;div&gt;{$result}&lt;/div&gt;
+{/if}
+&lt;form action="" method="post"&gt;
+    &lt;div&gt;
+        {"Name:"|i8n('example')} &lt;input type="text" name="name" value="" /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        {"Email:"|i18n('example')} &lt;input type="text" name="email" value="" /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="submit" name ="SubmitButton" value={'Submit'|i18n( 'example' )} /&gt;
+        &lt;input type="submit" name ="DiscardButton" value={'Discard'|i18n( 'example' )} /&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+</li>
+<li>
+<p>Implement class myFormView</p>
+
+<p>extension/myextension/classes/myformview.php</p>
+
+<pre><code>&lt;?php
+class myFormView implements xNodeviewRender
+{
+ /**
+  * This method is invoked before template is fetched.
+  *
+  * Typical usage:
+  * 1. Set php variable to template directly instead of use eZ custom operator in template
+  * 2. Customize http form action
+  *
+  */
+  public function initNodeview( $module, $node, $tpl, $viewMode )
+  {
+       // Disable view cache for this page, since the form will be dynamic
+       $tpl-&gt;setVariable( 'cache_ttl', 0 );
+
+       $http = eZHTTPTool::instance();
+       if( $http-&gt;hasVariable( 'SubmitButton' ) )
+       {
+            // Show result if the form submit
+            $name = $http-&gt;variable( 'name' );
+            $email = $http-&gt;variable( 'email' );
+            $tpl-&gt;setVariable( 'result', ezpI18n::tr( 'example', "You inputed Name: %1, Email %2", '', array( $name, $email )  ) );
+       }
+        else if( $http-&gt;hasVariable( 'DiscardButton' ) )
+        {
+            // Redirect to homepage if the form is discarded.
+            $module-&gt;redirectTo( '/' );
+        }
+
+  }
+}
+?&gt;
+</code></pre>
+</li>
+<li><p>Regenerated autoload array for extension
+ bin/php/ezpgenerateautoloads.php -e</p></li>
+<li><p>Clear cache before viewing the page(content/view/full/50).</p></li>
+</ol><h2>
+<a name="faq" class="anchor" href="#faq"><span class="octicon octicon-link"></span></a>FAQ</h2>
+
+<ol>
+<li>
+<p>Is the business logic inside view cache?</p>
+
+<p>Yes, for first visit eZ will invoke the business logic and generate view cache, for second visit it may skip business logic and load view cache only if the view cache keys are not changed.</p>
+
+<p>Because of that, for high dynamic page(like form), it's recommanded to disable view cache from php: </p>
+
+<pre><code> public function initNodeview( $module, $node, $tpl, $viewMode )
+ {
+     $tpl-&gt;setVariable( 'cache_ttl', 0 );
+</code></pre>
+</li>
+</ol><h2>
+<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h2>
+
+<p>Should</p>
+
+<ul>
+<li>Support override rules hierarchy</li>
+</ul><p>Could</p>
+
+<ul>
+<li>Control cache via persistant variable/cache block keys</li>
+</ul>
+        </section>
+
+        <footer>
+          Xoverridefilter is maintained by <a href="https://github.com/xc">xc</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
