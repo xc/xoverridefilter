@@ -41,7 +41,7 @@ Requirements
 
 - For eZ Publish 5.2: it works well
 
-- For eZ Publish 4.2 - 5.1: it needs a kernel patch(not an unauthorized hack, but a backport). see doc/patches/event-pre_rending-*.diff
+- For eZ Publish 4.2 - 5.1: it needs a kernel patch(not an unauthorized hack, but a feature backport). see doc/patches/event-pre_rending-*.diff
 
 
 Install
