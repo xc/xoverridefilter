@@ -152,9 +152,8 @@ Roadmap
 --------
 Should
 
-- Support multi Class(Class[]) in override.ini
+- Support override rules hierarchy
 
 Could
 
-- Support override rules hierarchy
 - Control cache via persistant variable/cache block keys
