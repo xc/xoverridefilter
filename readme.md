@@ -46,7 +46,7 @@ Requirements
 Install
 --------
 1. Copy this extension under \<ezp_root\>/extension
-2. If your eZ Publish is <5.2 (e.g. 4.7), run these commands under \<ezp_root\>
+2. If your eZ Publish is \<5.2 (e.g. 4.7), run these commands under \<ezp_root\>
    
          cp extension/xoverridefilter/doc/patches/event-pre_rending-4.5-4.7.diff ./
          patch -p0 < event-pre_rending-4.5-4.7.diff --dry-run
