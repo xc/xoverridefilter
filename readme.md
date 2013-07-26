@@ -152,7 +152,7 @@ Roadmap
 --------
 Should
 
-- Support multi Class[] instead of Class
+- Support multi Class[] in override.ini
 
 Could
 
