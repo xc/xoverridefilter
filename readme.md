@@ -14,7 +14,7 @@ Definition in override.ini
     MatchFile=form.tpl
     Subdir=templates
     Match[class_identifier]=myform
-    #this is new :)
+    #Class is new :)
     Class=myFormView
 
 Implementation in class myFormView
