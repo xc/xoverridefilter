@@ -1,0 +1,50 @@
+Index: kernel/classes/eznodeviewfunctions.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- kernel/classes/eznodeviewfunctions.php	(revision )
++++ kernel/classes/eznodeviewfunctions.php	(revision )
+@@ -92,7 +92,7 @@
+
+     static function generateNodeViewData( $tpl, $node, $object, $languageCode, $viewMode, $offset,
+                                           $viewParameters = array( 'offset' => 0, 'year' => false, 'month' => false, 'day' => false ),
+-                                          $collectionAttributes = false, $validation = false )
++                                          $collectionAttributes = false, $validation = false, eZModule $Module )
+     {
+         $section = eZSection::fetch( $object->attribute( 'section_id' ) );
+         if ( $section )
+@@ -185,6 +185,9 @@
+ 
+         $tpl->setVariable( 'node_path', $path );
+ 
++        $event = ezpEvent::getInstance();
++        $event->notify( 'content/pre_rendering', array( $Module, $node, $tpl, $viewMode ) );
++
+         $Result = array();
+         $Result['content']         = $tpl->fetch( 'design:node/view/' . $viewMode . '.tpl' );
+         $Result['view_parameters'] = $viewParameters;
+@@ -555,7 +558,7 @@
+         $Result = eZNodeviewfunctions::generateNodeViewData( $tpl, $node, $object,
+                                                               $LanguageCode, $ViewMode, $Offset,
+                                                               $viewParameters, $collectionAttributes,
+-                                                              $validation );
++                                                              $validation, $Module );
+ 
+         // 'store' depends on noCache: if $noCache is set, this means that retrieve
+         // returned it, and the noCache fake cache file is already stored
+diff --git kernel/common/eztemplatedesignresource.php kernel/common/eztemplatedesignresource.php
+index 38a9035..6eba557 100644
+--- kernel/common/eztemplatedesignresource.php
++++ kernel/common/eztemplatedesignresource.php
+@@ -867,6 +867,10 @@ class eZTemplateDesignResource extends eZTemplateFileResource
+
+         foreach ( $overrideSettingGroups as $overrideName => $overrideSetting )
+         {
++            if( !isset( $overrideSetting['Source'] ) )
++            {
++                continue;
++            }
+             $overrideSource = "/" . $overrideSetting['Source'];
+             $overrideMatchFile = $overrideSetting['MatchFile'];
+

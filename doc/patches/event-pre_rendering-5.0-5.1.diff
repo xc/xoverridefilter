@@ -1,0 +1,48 @@
+diff --git kernel/classes/eznodeviewfunctions.php kernel/classes/eznodeviewfunctions.php
+index 882d7cc..ec83960 100644
+--- kernel/classes/eznodeviewfunctions.php
++++ kernel/classes/eznodeviewfunctions.php
+@@ -75,7 +75,7 @@ class eZNodeviewfunctions
+      */
+     static function generateNodeViewData( eZTemplate $tpl, eZContentObjectTreeNode $node, eZContentObject $object, $languageCode, $viewMode, $offset,
+                                           array $viewParameters = array( 'offset' => 0, 'year' => false, 'month' => false, 'day' => false ),
+-                                          $collectionAttributes = false, $validation = false )
++                                          $collectionAttributes = false, $validation = false, eZModule $Module )
+     {
+         $section = eZSection::fetch( $object->attribute( 'section_id' ) );
+         if ( $section )
+@@ -176,6 +176,9 @@ class eZNodeviewfunctions
+ 
+         $tpl->setVariable( 'node_path', $path );
+ 
++        $event = ezpEvent::getInstance();
++        $event->notify( 'content/pre_rendering', array( $Module, $node, $tpl, $viewMode ) );
++
+         $Result = array();
+         $Result['content']         = $tpl->fetch( 'design:node/view/' . $viewMode . '.tpl' );
+         $Result['view_parameters'] = $viewParameters;
+@@ -573,7 +576,8 @@ class eZNodeviewfunctions
+             $Offset,
+             $viewParameters,
+             $collectionAttributes,
+-            $validation
++            $validation,
++            $Module
+         );
+ 
+         // 'store' depends on noCache: if $noCache is set, this means that retrieve
+diff --git kernel/common/eztemplatedesignresource.php kernel/common/eztemplatedesignresource.php
+index 38a9035..6eba557 100644
+--- kernel/common/eztemplatedesignresource.php
++++ kernel/common/eztemplatedesignresource.php
+@@ -867,6 +867,10 @@ class eZTemplateDesignResource extends eZTemplateFileResource
+ 
+         foreach ( $overrideSettingGroups as $overrideName => $overrideSetting )
+         {
++            if( !isset( $overrideSetting['Source'] ) )
++            {
++                continue;
++            }
+             $overrideSource = "/" . $overrideSetting['Source'];
+             $overrideMatchFile = $overrideSetting['MatchFile'];
+ 

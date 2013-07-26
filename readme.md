@@ -35,11 +35,24 @@ Enhanced override.ini supports
 
 The 2 above can be combined with existing template override.
 
+Requirements
+---------
+- eZ Publish 5.2: it will work well
+
+- eZ Publish 4.2 - 5.1: it needs kernel patch(not a hack, but a commit backporting). see doc/patches/event-pre_rending-*.diff
+
 
 Install
 --------
-1. Copy this extension under <ezp_root>/extension
-2. Activate this extension
+1. Copy this extension under \<ezp_root\>/extension
+2. If your eZ Publish is <5.2 (e.g. 4.7), run these commands under \<ezp_root\>
+   
+       cp extension/xoverridefilter/doc/patches/event-pre_rending-4.5-4.7.diff ./
+       patch -p0 < event-pre_rending-4.5-4.7.diff --dry-run
+       patch -p0 < event-pre_rending-4.5-4.7.diff
+       
+    P.S. For community versioning, 4.5-4.7 = 2011.5-2012.5 
+2. Activate extension xoverridefilter
 3. Clear ini cache
 4. Regenerate autoload array
 
