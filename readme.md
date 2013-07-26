@@ -73,7 +73,26 @@ Example(See doc/example for code)
 
    The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
 
-2. Implement class myFormView
+
+2. Implement template
+
+        {if is_set( $result )}
+        <div>{$result}</div>
+        {/if}
+        <form action="" method="post">
+            <div>
+                {"Name:"|i8n('example')} <input type="text" name="name" value="" />
+            </div>
+            <div>
+                {"Email:"|i18n('example')} <input type="text" name="email" value="" />
+            </div>
+            <div>
+                <input type="submit" name ="SubmitButton" value={'Submit'|i18n( 'example' )} />
+                <input type="submit" name ="DiscardButton" value={'Discard'|i18n( 'example' )} />
+            </div>
+        </form>
+
+3. Implement class myFormView
 
     extension/myextension/classes/myformview.php
 
@@ -90,16 +109,31 @@ Example(See doc/example for code)
           */
           public function initNodeview( $module, $node, $tpl, $viewMode, $http )
           {
-            // Actual logic is implemented here
+               // Disable view cache for this page, since the form will be dynamic
+               $tpl->setVariable( 'cache_ttl', 0 );
+
+               $http = eZHTTPTool::instance();
+               if( $http->hasVariable( 'SubmitButton' ) )
+               {
+                    // Show result if the form submit
+                    $name = $http->variable( 'name' );
+                    $email = $http->variable( 'email' );
+                    $tpl->setVariable( 'result', ezpI18n::tr( 'example', "You inputed Name: %1, Email %2", '', array( $name, $email )  ) );
+               }
+                else if( $http->hasVariable( 'DiscardButton' ) )
+                {
+                    // Redirect to homepage if the form is discarded.
+                    $module->redirectTo( '/' );
+                }
 
           }
         }
         ?>
 
-3. Regenerated autoload array for extension
+4. Regenerated autoload array for extension
 <php path> bin/php/ezpgenerateautoloads.php -e
 
-4. Clear cache before viewing the page(content/view/full/50).
+5. Clear cache before viewing the page(content/view/full/50).
 
 FAQ
 ---------
