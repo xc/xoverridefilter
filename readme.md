@@ -156,7 +156,7 @@ FAQ
 ---------
 1. Is the business logic inside view cache?
 
-   Yes, for first view eZ will invoke the business logic and generate view cache, for second view it may load view cache if the view cache keys are not changed.
+   Yes, for first visit eZ will invoke the business logic and generate view cache, for second visit it may load view cache if the view cache keys are not changed.
 
    Because of that, for high dynamic page(like form), it's recommanded to disable view cache from php: 
    
