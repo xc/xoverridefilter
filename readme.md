@@ -30,7 +30,7 @@ Implement template form.tpl
             </div>
             <div>
                 <input type="submit" name ="SubmitButton" value='Submit' />
-                <input type="submit" name ="DiscardButton" value=Discard' />
+                <input type="submit" name ="DiscardButton" value='Discard' />
             </div>
         </form>
 
