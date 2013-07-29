@@ -16,14 +16,46 @@ Definition in override.ini
     Match[class_identifier]=myform
     #Class is new :)
     Class=myFormView
+Implement template form.tpl
 
-Implementation in class myFormView
+        {if is_set( $result )}
+        <div>{$result}</div>
+        {/if}
+        <form action="" method="post">
+            <div>
+                Name: <input type="text" name="name" value="" />
+            </div>
+            <div>
+                Email: <input type="text" name="email" value="" />
+            </div>
+            <div>
+                <input type="submit" name ="SubmitButton" value='Submit' />
+                <input type="submit" name ="DiscardButton" value=Discard' />
+            </div>
+        </form>
+
+
+Implement class myFormView
 
     class myFormView implements xNodeviewRender
     {
       function initNodeview( $module, $node, $tpl, $viewMode )
       {
-        //implement business logic, set template variable
+          $tpl->setVariable( 'cache_ttl', 0 );
+
+          $http = eZHTTPTool::instance();
+          if( $http->hasVariable( 'SubmitButton' ) )
+          {
+             // Show result if the form submit
+             $name = $http->variable( 'name' );
+             $email = $http->variable( 'email' );
+             $tpl->setVariable( 'result', ezpI18n::tr( 'example', "You inputed Name: %1, Email %2", '', array( $name, $email )  ) );
+          }
+          else if( $http->hasVariable( 'DiscardButton' ) )
+          {
+             // Redirect to homepage if the form is discarded.
+             $module->redirectTo( '/' );
+          }
       }
     }
 
