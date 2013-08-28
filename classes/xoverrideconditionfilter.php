@@ -110,21 +110,17 @@ class xOverrideConditionFilter
 
         $ini = eZINI::instance( 'xoverride.ini' );
         $supportedDatatype = $ini->variable( 'General', 'SupportedDatatype' );
-        $newKeys = array();
+        $keys = array();
         foreach( $dataMap as $attributeId=>$attribute )
         {
             $dataType = $attribute->attribute( 'data_type_string' );
             if( in_array( $dataType, $supportedDatatype ) )
             {
                 $value = $attribute->attribute( 'content' );
-                $newKeys['attribute_' . $attributeId] = $value;
+                $keys[] = array( 'attribute_' . $attributeId, $value );
             }
         }
-
         $res = eZTemplateDesignResource::instance();
-        $existingKeys = $res->keys();
-        $keys = array_merge( $existingKeys, $newKeys );
-
         $res->setKeys( $keys );
 
         if( !empty( $overrideClass ) )
