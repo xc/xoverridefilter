@@ -11,7 +11,7 @@ Definition in override.ini
 
     [myform_view]
     Source=node/view/full.tpl
-    MatchFile=form.tpl
+    MatchFile=myform.tpl
     Subdir=templates
     Match[class_identifier]=myform
     #Class is new :)
@@ -64,7 +64,7 @@ Enhanced override.ini
 Enhanced override.ini supports
 
 1. Class tag to identify a php class implenetation of the logic.
-2. Match[attribute_<attribute_identifier>]=<value> to better filter template.
+2. Match[attribute_\<attribute_identifier\>]=\<value\> to better filter template.
 3. Match[node], Match[class_identifer], Match[viewmode] for view logic conditions
 
 The 3 above can be combined with existing template override.
@@ -121,6 +121,21 @@ Example(See doc/example for code)
 
    The configuration above means that, 'myform' objects under Standard section will use class myFormView as view logic and form.tpl as template; while 'myform' objects under other sections will use myFormView as view logic and full.tpl(if no other override rule applies) as template.
 
+**Scenario 3 - Use attribute for override match. It's better to use this instead of node_id**. For example:
+
+      [article_breaking-news_full]
+      Source=node/view/full.tpl
+      MatchFile=break-news.tpl
+      Subdir=templates
+      Match[attribute_article_identifier]=breaking-news
+      Match[class_identifier]=article
+    
+      [article_campaign_full]
+      Source=node/view/full.tpl
+      MatchFile=campaign.tpl
+      Subdir=templates
+      Match[attribute_article_identifier]=campaign
+      Match[class_identifier]=article
 
 2. Implement template form.tpl
 
