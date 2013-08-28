@@ -64,9 +64,10 @@ Enhanced override.ini
 Enhanced override.ini supports
 
 1. Class tag to identify a php class implenetation of the logic.
-2. Match[node], Match[class_identifer], Match[viewmode] for view logic conditions
+2. Match[attribute_<attribute_identifier>]=<value> to better filter template.
+3. Match[node], Match[class_identifer], Match[viewmode] for view logic conditions
 
-The 2 above can be combined with existing template override.
+The 3 above can be combined with existing template override.
 
 Requirements
 ---------

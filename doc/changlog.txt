@@ -2,6 +2,7 @@ X Override Filter Changelog
 
 1.0.0-beta2
 - Support eZ Publish 4.2-5.1(see install section on /readme.md)
+- Support Match[attribute_<attribute_identifier>]=<value> in override.ini
 
 1.0.0-beta1
 - Initial release
