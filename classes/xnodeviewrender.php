@@ -4,7 +4,7 @@
 //
 // Created on: <25-07-2013 16:13:00 xc>
 //
-// Copyright (C) Chen Xiongjie. All rights reserved.
+// Copyright (C) Aplia AS. All rights reserved.
 //
 // This file may be distributed and/or modified under the terms of the
 // "GNU General Public License" version 2 as published by the Free
