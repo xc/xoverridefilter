@@ -109,26 +109,44 @@ class xOverrideConditionFilter
         $dataMap = $object->dataMap();
 
         $ini = eZINI::instance( 'xoverride.ini' );
-        $supportedDatatype = $ini->variable( 'General', 'SupportedDatatype' );
-        $keys = array();
-        foreach( $dataMap as $attributeId=>$attribute )
+        $siteAccessesMatch = false;
+        if( !$ini->hasVariable( 'TemplateOverride', 'AvailableSiteAccess' ) )
         {
-            $dataType = $attribute->attribute( 'data_type_string' );
-            if( in_array( $dataType, $supportedDatatype ) )
+            $siteAccessesMatch = true;
+        }
+        else
+        {
+            $siteAccesses = $ini->variable( 'TemplateOverride', 'AvailableSiteAccess' );
+            $currentSiteAccessArray = eZSiteAccess::current();
+            $currentSiteAccess = $currentSiteAccessArray['name'];
+            if( is_array( $siteAccesses ) && ( in_array( $currentSiteAccess, $siteAccesses ) or in_array( '*', $siteAccesses ) ) )
             {
-                $value = $attribute->attribute( 'content' );
-                $keys[] = array( 'attribute_' . $attributeId, $value );
+                $siteAccessesMatch = true;
             }
         }
-        $res = eZTemplateDesignResource::instance();
-        $res->setKeys( $keys );
-
-        if( !empty( $overrideClass ) )
+        if( $siteAccessesMatch )
         {
-            $overrideView = new $overrideClass();
-            $http = eZHTTPTool::instance();
-            eZDebug::writeNotice( "Loading nodeview render $overrideClass, node id: $nodeID", __METHOD__ );
-            $overrideView->initNodeview( $module, $node, $tpl, $viewMode );
+            $supportedDatatype = $ini->variable( 'General', 'SupportedDatatype' );
+            $keys = array();
+            foreach( $dataMap as $attributeId=>$attribute )
+            {
+                $dataType = $attribute->attribute( 'data_type_string' );
+                if( in_array( $dataType, $supportedDatatype ) )
+                {
+                    $value = $attribute->attribute( 'content' );
+                    $keys[] = array( 'attribute_' . $attributeId, $value );
+                }
+            }
+            $res = eZTemplateDesignResource::instance();
+            $res->setKeys( $keys );
+
+            if( !empty( $overrideClass ) )
+            {
+                $overrideView = new $overrideClass();
+                $http = eZHTTPTool::instance();
+                eZDebug::writeNotice( "Loading nodeview render $overrideClass, node id: $nodeID", __METHOD__ );
+                $overrideView->initNodeview( $module, $node, $tpl, $viewMode );
+            }
         }
     }
 }
