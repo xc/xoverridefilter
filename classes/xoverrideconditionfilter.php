@@ -25,6 +25,17 @@ class xOverrideConditionFilter
 {
     public static function filter( $module, $node, $tpl, $viewMode )
     {
+        //Make it compatable with patches before 5.2 and 5.2(no patch) because a patch reverse
+        //Ref.https://github.com/ezsystems/ezpublish-legacy/commit/85ab7fb8374f31c5cba00450e71d27e456552878
+        if( !$module instanceof eZModule )
+        {
+            $viewMode = $tpl;
+            $tpl = $node;
+            $node = $module;
+            $module = null;
+        }
+        //End of compatability fix
+
         $ini = eZINI::instance( 'override.ini' );
         $conditions = $ini->groups();
 
