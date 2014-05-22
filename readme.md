@@ -5,6 +5,8 @@ Introduction
 -----------
 With this simple extension, you can define your business logic(a php class) with template override in override.ini, so business logic can be **easily and clearly** done in a pure php class instead of custom operator, complicated templating, or datatype.
 
+The initial idea came from pull request: https://github.com/ezsystems/ezpublish-legacy/pull/694 which is in eZ Publish 5.2 automatically.
+
 Small example:
 
 Definition in override.ini
